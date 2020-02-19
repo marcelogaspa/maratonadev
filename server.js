@@ -26,29 +26,16 @@ nunjucks.configure("./", {
     noCache: true,
 })
 
-//Array
-const donors = [
-    {   
-        name: "Marcelo Gasparetti",
-        blood: "O+"
-    },
-    {   
-        name: "Juliana do Nascimento",
-        blood: "O-"
-    },
-    {
-        name: "Giulia Rubio Gasparetti",
-        blood: "O-"
-    },
-    {   
-        name: "Carl Marx",
-        blood: "AB+"
-    },
-]
 
 //index display
 server.get("/", function(req, res){
-    return res.render("index.html", { donors })
+   db.query("select * from donors", function(err, result) {
+       if(err) return res.send("Database Error")
+       
+       const donors = result.rows
+       return res.render("index.html", { donors })
+   })
+    
 })
 
 server.post("/", function(req, res) {
@@ -56,14 +43,24 @@ server.post("/", function(req, res) {
   const email = req.body.email
   const blood = req.body.blood
 
-  //add new values to array donors
-  donors.push({
-      name: name,
-      blood: blood,
-    })
-    return res.redirect("/")
-})
+  if (name == "" || email == "" || blood == "") {
+      return res.send("you need to fill in all the fields")
+  }
 
+  const query = `INSERT INTO donors("name","email","blood") 
+  VALUES ($1, $2, $3)`
+
+  const values = [name, email, blood]
+  
+  db.query(query, values, function(err) {
+      if(err) return res.send("Database error")
+
+      return res.redirect("/")
+
+  })
+
+    
+})
 
 
 server.listen(5050, function() {
