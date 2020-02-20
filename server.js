@@ -1,23 +1,26 @@
 //server constructor
 const express = require("express")
 const server =express()
+//const mongoose = require('mongoose')
 
 //requesting extra files
 server.use(express.static('public'))
-
 
 //enabling body form
 server.use(express.urlencoded({extended: true}))
 
 //DataBase connection
-const Pool = require('pg').Pool
-const db = new Pool ({
-    user: 'postgres',
-    password: 'root',
-    host: 'localhost',
-    port: 5432,
-    database: 'bancodesangue'
-})
+//mongoose.connect('mongodb+srv://donatelife:donatelife2020@cluster0-pssq6.mongodb.net/test?retryWrites=true&w=majority', {
+ //   useNewUrlParser: true
+//})
+ const Pool = require('pg').Pool
+ const db = new Pool ({
+     user: 'postgres',
+     password: 'root',
+     host: 'localhost',
+     port: 5432,
+     database: 'bancodesangue'
+     })
 
 //template engineer 
 const nunjucks = require("nunjucks")
