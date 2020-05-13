@@ -1,0 +1,58 @@
+PS C:\WINDOWS\system32> mongo "mongodb+srv://cluster0-pssq6.mongodb.net/test"  --username donatelife
+MongoDB shell version v4.2.6
+Enter password:
+connecting to: mongodb://cluster0-shard-00-02-pssq6.mongodb.net:27017,cluster0-shard-00-00-pssq6.mongodb.net:27017,cluster0-shard-00-01-pssq6.mongodb.net:27017/test?authSource=admin&compressors=disabled&gssapiServiceName=mongodb&replicaSet=Cluster0-shard-0&ssl=true
+2020-05-06T21:15:05.229-0300 I  NETWORK  [js] Starting new replica set monitor for Cluster0-shard-0/cluster0-shard-00-02-pssq6.mongodb.net:27017,cluster0-shard-00-00-pssq6.mongodb.net:27017,cluster0-shard-00-01-pssq6.mongodb.net:27017
+2020-05-06T21:15:05.229-0300 I  CONNPOOL [ReplicaSetMonitor-TaskExecutor] Connecting to cluster0-shard-00-02-pssq6.mongodb.net:27017
+2020-05-06T21:15:05.230-0300 I  CONNPOOL [ReplicaSetMonitor-TaskExecutor] Connecting to cluster0-shard-00-01-pssq6.mongodb.net:27017
+2020-05-06T21:15:05.230-0300 I  CONNPOOL [ReplicaSetMonitor-TaskExecutor] Connecting to cluster0-shard-00-00-pssq6.mongodb.net:27017
+2020-05-06T21:15:10.156-0300 I  NETWORK  [ReplicaSetMonitor-TaskExecutor] Confirmed replica set for Cluster0-shard-0 is Cluster0-shard-0/cluster0-shard-00-00-pssq6.mongodb.net:27017,cluster0-shard-00-01-pssq6.mongodb.net:27017,cluster0-shard-00-02-pssq6.mongodb.net:27017
+Implicit session: session { "id" : UUID("f1a5e119-d1f8-4caa-bd52-41172cd3f4e3") }
+MongoDB server version: 4.2.6
+Welcome to the MongoDB shell.
+For interactive help, type "help".
+For more comprehensive documentation, see
+        http://docs.mongodb.org/
+Questions? Try the support group
+        http://groups.google.com/group/mongodb-user
+Error while trying to show server startup warnings: user is not allowed to do action [getLog] on [admin.]
+MongoDB Enterprise Cluster0-shard-0:PRIMARY> ls
+[native code]
+MongoDB Enterprise Cluster0-shard-0:PRIMARY> show databases
+admin  0.000GB
+local  3.825GB
+MongoDB Enterprise Cluster0-shard-0:PRIMARY> show ?
+...
+...
+error2:invalid string position
+MongoDB Enterprise Cluster0-shard-0:PRIMARY> show
+2020-05-06T21:38:25.661-0300 E  QUERY    [js] uncaught exception: Error: don't know how to show [] :
+shellHelper.show@src/mongo/shell/utils.js:1139:11
+shellHelper@src/mongo/shell/utils.js:790:15
+@(shellhelp2):1:1
+MongoDB Enterprise Cluster0-shard-0:PRIMARY> show databases
+admin  0.000GB
+local  3.825GB
+MongoDB Enterprise Cluster0-shard-0:PRIMARY> ls
+[native code]
+MongoDB Enterprise Cluster0-shard-0:PRIMARY> pwd
+[native code]
+MongoDB Enterprise Cluster0-shard-0:PRIMARY>
+MongoDB Enterprise Cluster0-shard-0:PRIMARY>
+MongoDB Enterprise Cluster0-shard-0:PRIMARY> show databases
+admin  0.000GB
+local  3.825GB
+MongoDB Enterprise Cluster0-shard-0:PRIMARY> use bancodesangue
+switched to db bancodesangue
+MongoDB Enterprise Cluster0-shard-0:PRIMARY> show database
+2020-05-06T22:11:52.959-0300 E  QUERY    [js] uncaught exception: Error: don't know how to show [database] :
+shellHelper.show@src/mongo/shell/utils.js:1139:11
+shellHelper@src/mongo/shell/utils.js:790:15
+@(shellhelp2):1:1
+MongoDB Enterprise Cluster0-shard-0:PRIMARY> db.donors
+bancodesangue.donors
+MongoDB Enterprise Cluster0-shard-0:PRIMARY> db.donors.insert({name: "Marcelo Gasparetti", email: "mgasparetti86@gmail.com", blood:"O+"})
+WriteResult({ "nInserted" : 1 })
+MongoDB Enterprise Cluster0-shard-0:PRIMARY> db.donors.find()
+{ "_id" : ObjectId("5eb36142bf87474ea47173f2"), "name" : "Marcelo Gasparetti", "email" : "mgasparetti86@gmail.com", "blood" : "O+" }
+MongoDB Enterprise Cluster0-shard-0:PRIMARY>
