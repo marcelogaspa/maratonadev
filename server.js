@@ -1,6 +1,6 @@
 //server constructor
 const express = require("express")
-const server =express()
+const server = express()
 
 //requesting extra files
 server.use(express.static('public'))
@@ -24,11 +24,10 @@ nunjucks.configure("./", {
     noCache: true,
 })
 
-
 //index display
 server.get("/", function(req, res){
    db.query("select * from donors", function(err, result) {
-       if(err) return res.send("Database Error")
+       if(err) return res.json({message: "Database Error"})
        
        const donors = result.rows
        return res.render("index.html", { donors })
@@ -42,7 +41,7 @@ server.post("/", function(req, res) {
   const blood = req.body.blood
 
   if (name == "" || email == "" || blood == "") {
-      return res.send("you need to fill in all the fields")
+      return res.json({message: "you need to fill in all the fields"})
   }
 
   const query = `INSERT INTO donors("name","email","blood") 
@@ -51,7 +50,7 @@ server.post("/", function(req, res) {
   const values = [name, email, blood]
   
   db.query(query, values, function(err) {
-      if(err) return res.send("Database error")
+      if(err) return res.json({message: "Database error"})
 
       return res.redirect("/")
 
